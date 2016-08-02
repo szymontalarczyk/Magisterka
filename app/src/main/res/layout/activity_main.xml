@@ -27,6 +27,29 @@
         android:measureAllChildren="false"
         android:nestedScrollingEnabled="false" />
 
+    <fragment class="com.example.szymon.messor.MainScreen"
+        android:id="@+id/MainScreenFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"></fragment>
 
+
+    <fragment class="com.example.szymon.messor.ManualControll"
+        android:id="@+id/ManualControllFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"></fragment>
+
+    <fragment class="com.example.szymon.messor.Crawl"
+        android:id="@+id/CrawlFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"></fragment>
+
+    <fragment class="com.example.szymon.messor.RobotState"
+        android:id="@+id/RobotStateFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"></fragment>
+    <fragment class="com.example.szymon.messor.Settings_Fragment"
+        android:id="@+id/SettingFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"></fragment>
 
 </android.support.v4.widget.DrawerLayout>
