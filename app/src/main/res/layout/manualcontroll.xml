@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/frameLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dol"
+            android:id="@+id/down"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Góra"
+        android:id="@+id/up"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_above="@+id/frameLayout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="prawo"
+        android:id="@+id/right"
+        android:layout_gravity="left|center_vertical"
+        android:layout_alignTop="@+id/frameLayout"
+        android:layout_toEndOf="@+id/frameLayout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lewo"
+        android:id="@+id/left"
+        android:layout_gravity="right|center_vertical"
+        android:layout_alignTop="@+id/frameLayout"
+        android:layout_toStartOf="@+id/frameLayout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sterowanie manualne robota"
+        android:id="@+id/textView4"
+        android:textStyle="bold"
+        android:theme="@style/AppTheme"
+        android:transitionName="@string/abc_action_bar_up_description"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_above="@+id/up"
+        android:layout_alignEnd="@+id/right"
+        android:layout_marginBottom="138dp" />
+</RelativeLayout>
