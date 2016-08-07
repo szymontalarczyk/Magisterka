@@ -1,5 +1,6 @@
 package com.example.szymon.messor;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -81,6 +82,12 @@ Toolbar toolbar = null;
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
+
+
+
+
     }
 
     @Override
@@ -108,12 +115,12 @@ Toolbar toolbar = null;
         } else if (id == R.id.CrawlControll) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, Crawl).commit();
         } else if (id == R.id.Accelerometr) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, Crawl).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, Accelerometr).commit();
         } else if (id == R.id.Settings) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
         } else if (id == R.id.robot_state) {
 
-            MyClientTask myClientTask = new MyClientTask("192.168.1.112",1313);
+            MyClientTask myClientTask = new MyClientTask("192.168.1.112",2426);
             myClientTask.execute();
 
 
@@ -211,7 +218,7 @@ Toolbar toolbar = null;
 
 
 
-    public class MyClientTask extends AsyncTask<Void, Void,Void> {
+     public class MyClientTask extends AsyncTask<Void, Void,Void> {
 
         String dstAddress;
         int dstPort;
@@ -223,6 +230,8 @@ Toolbar toolbar = null;
             dstPort = port;
 
         }
+
+
 
         @Override
         protected Void doInBackground(Void... arg0) {

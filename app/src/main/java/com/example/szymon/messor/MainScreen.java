@@ -42,13 +42,13 @@ int data;
 
 
 
-        editTextAddress= (EditText)myView.findViewById(R.id.ip_connect);
+       // editTextAddress= (EditText)myView.findViewById(R.id.ip_connect);
         ip = (TextView) myView.findViewById(R.id.showIP);
        // X_send = (EditText)myView.findViewById(R.id.sendx);
-        buttonConnect= (Button)myView.findViewById(R.id.connect_to_robot);
-        buttonConnect.setOnClickListener(buttonConnectOnClickListener);
+ //       buttonConnect= (Button)myView.findViewById(R.id.connect_to_robot);
+    //    buttonConnect.setOnClickListener(buttonConnectOnClickListener);
 //iks =(TextView)myView.findViewById(R.id.wpisz_x) ;
-ipsign=(TextView)myView.findViewById(R.id.IPPP);
+//ipsign=(TextView)myView.findViewById(R.id.IPPP);
 
 
 ip.setText(getIpAddress());
