@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,19 +28,11 @@ import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,Settings_Fragment.InterfaceDataCommunicator{
     FragmentManager fragmentManager = getFragmentManager();
 NavigationView navigationView = null;
 Toolbar toolbar = null;
 
-     int x;
-    float y;
-    float z;
-    float alpha;
-    float beta;
-    float gamma;
-    float speed;
-    float accel;
 
     byte[] data;
     byte[] id;
@@ -50,13 +43,14 @@ Toolbar toolbar = null;
     Bundle bundleManual;
     Bundle bundleRobotState;
     Bundle bundleSettings;
-
+    String response;
     MainScreen MainScreen;
     Crawl Crawl;
     Accelerometr Accelerometr;
     ManualControll ManualControll;
     RobotState RobotState;
     Settings_Fragment Settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +61,6 @@ Toolbar toolbar = null;
         init_screens();
 
 
-        MainScreen.setArguments(bundleMainScreen);
-      //  Settings.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -118,11 +110,12 @@ Toolbar toolbar = null;
             fragmentManager.beginTransaction().replace(R.id.content_frame, Accelerometr).commit();
         } else if (id == R.id.Settings) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
+
+
+
         } else if (id == R.id.robot_state) {
-
-            MyClientTask myClientTask = new MyClientTask("192.168.1.112",2426);
-            myClientTask.execute();
-
+byte[] data2 = data_to_robot(0,0,0,0,0,0,0,0);
+do_order("192.168.1.112",2426,data2);
 
             fragmentManager.beginTransaction().replace(R.id.content_frame, RobotState).commit();
 
@@ -216,16 +209,34 @@ Toolbar toolbar = null;
 
     }
 
+    @Override
+    public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id) {
 
 
-     public class MyClientTask extends AsyncTask<Void, Void,Void> {
+
+
+        //choice ==1 settings data
+        if (id ==1) {
+
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            do_order(ip, port, data);
+
+
+
+        }
+
+        }
+
+
+
+    public class MyClientTask extends AsyncTask<Void, Void,Void> {
 
         String dstAddress;
         int dstPort;
-        String response = "";
 
 
-        MyClientTask(String addr, int port) {
+
+        MyClientTask(String addr, int port,byte[] data) {
             dstAddress = addr;
             dstPort = port;
 
@@ -239,11 +250,6 @@ Toolbar toolbar = null;
             Socket socket = null;
             DataOutputStream dataOutputStream = null;
             DataInputStream dataInputStream = null;
-
-
-
-
-            byte[] data = data_to_robot(1,0,0,0,0,0,0,0);
             ByteBuffer buffer2=ByteBuffer.wrap(data);
             try {
                 socket = new Socket(dstAddress, dstPort);
@@ -295,11 +301,26 @@ Toolbar toolbar = null;
 
         @Override
         protected void onPostExecute(Void result) {
+
             //   textResponse.setText(response);
             super.onPostExecute(result);
         }
 
     }
+
+
+
+    void do_order(String ip,int port,byte[] data)
+    {
+
+        MyClientTask myClientTask = new MyClientTask(ip,port,data);
+
+                myClientTask.execute();
+
+    }
+
+
+
 }
 
 
