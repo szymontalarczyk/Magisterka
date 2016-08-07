@@ -62,7 +62,7 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
 
             @Override
             public void onClick(View v) {
-                textResponse.setText("");
+
                 editTextAddress.setText("");
                 editTextPort.setText("");
             }
@@ -86,13 +86,12 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
         @Override
         public void onClick(View arg0) {
 
-            Ip = editTextAddress.getText().toString();
-           port = Integer.parseInt(editTextPort.getText().toString());
+    Ip = editTextAddress.getText().toString();
+    port = Integer.parseInt(editTextPort.getText().toString());
 
-        interfaceDataCommunicator.updateData(Ip,port,1,2,3,4,5,6,7,8,id);
+    interfaceDataCommunicator.updateData(Ip, port, 1, 2, 3, 4, 5, 6, 7, 8, id);
 
-
-        }
+ }
     };
 
 

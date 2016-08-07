@@ -43,14 +43,15 @@ Toolbar toolbar = null;
     Bundle bundleManual;
     Bundle bundleRobotState;
     Bundle bundleSettings;
-    String response;
+
     MainScreen MainScreen;
     Crawl Crawl;
     Accelerometr Accelerometr;
     ManualControll ManualControll;
     RobotState RobotState;
     Settings_Fragment Settings;
-
+String dstAddres;
+    int dstport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,8 @@ Toolbar toolbar = null;
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        dstAddres="192.168.1.112";
+        dstport=2426;
 
 
 
@@ -114,8 +116,10 @@ Toolbar toolbar = null;
 
 
         } else if (id == R.id.robot_state) {
-byte[] data2 = data_to_robot(0,0,0,0,0,0,0,0);
-do_order("192.168.1.112",2426,data2);
+
+            //for test
+        byte[] data2 = data_to_robot(0,0,0,0,0,0,0,0);
+        do_order(dstAddres,dstport,data2);
 
             fragmentManager.beginTransaction().replace(R.id.content_frame, RobotState).commit();
 
@@ -209,23 +213,7 @@ do_order("192.168.1.112",2426,data2);
 
     }
 
-    @Override
-    public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id) {
 
-
-
-
-        //choice ==1 settings data
-        if (id ==1) {
-
-            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
-            do_order(ip, port, data);
-
-
-
-        }
-
-        }
 
 
 
@@ -258,16 +246,13 @@ do_order("192.168.1.112",2426,data2);
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 writeBuffer(buffer2,dataOutputStream);
 
-                response = dataInputStream.readUTF();
 
             } catch (UnknownHostException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-                response = "UnknownHostException: " + e.toString();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-                response = "IOException: " + e.toString();
             } finally {
                 if (socket != null) {
                     try {
@@ -301,8 +286,6 @@ do_order("192.168.1.112",2426,data2);
 
         @Override
         protected void onPostExecute(Void result) {
-
-            //   textResponse.setText(response);
             super.onPostExecute(result);
         }
 
@@ -314,12 +297,28 @@ do_order("192.168.1.112",2426,data2);
     {
 
         MyClientTask myClientTask = new MyClientTask(ip,port,data);
-
-                myClientTask.execute();
+        myClientTask.execute();
 
     }
 
+    @Override
+    public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id) {
 
+        dstAddres=ip;
+        dstport=port;
+
+
+        //choice ==1 settings data
+        if (id ==1) {
+
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            do_order(dstAddres, dstport, data);
+
+        }
+        //id==2 manualcontroll
+
+
+    }
 
 }
 
