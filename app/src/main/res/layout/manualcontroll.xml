@@ -38,15 +38,6 @@
         android:layout_alignTop="@+id/frameLayout"
         android:layout_toEndOf="@+id/frameLayout" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lewo"
-        android:id="@+id/left"
-        android:layout_gravity="right|center_vertical"
-        android:layout_alignTop="@+id/frameLayout"
-        android:layout_toStartOf="@+id/frameLayout" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +48,25 @@
         android:theme="@style/AppTheme"
         android:transitionName="@string/abc_action_bar_up_description"
         style="@style/Base.TextAppearance.AppCompat.Title"
-        android:layout_above="@+id/up"
-        android:layout_alignEnd="@+id/right"
-        android:layout_marginBottom="138dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/frameLayout"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lewo"
+        android:id="@+id/left"
+        android:layout_gravity="right|center_vertical"
+        android:layout_below="@+id/up"
+        android:layout_toStartOf="@+id/up" />
+
 </RelativeLayout>
