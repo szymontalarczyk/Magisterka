@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity
 NavigationView navigationView = null;
 Toolbar toolbar = null;
 
-
+    String dstAddress;
+    int dstPort;
     byte[] data;
     byte[] id;
     byte[] dane;
@@ -59,8 +60,9 @@ String dstAddres;
         setContentView(R.layout.activity_main);
 
 
-        init_screens();
-
+        init();
+        dstAddres="192.168.1.107";
+        dstport=2426;
         MainScreen = new MainScreen();
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -75,7 +77,7 @@ String dstAddres;
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        dstAddres="192.168.1.112";
+        dstAddres="192.168.1.107";
         dstport=2426;
 
 
@@ -105,13 +107,21 @@ String dstAddres;
         if (id == R.id.MainScreen) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MainScreen()).commit();
         } else if (id == R.id.ManualControll) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new ManualControll()).commit();
+            ManualControll = new ManualControll();
+            bundleManual.putString("ip",dstAddres);
+            bundleManual.putInt("port",dstPort);
+            ManualControll.setArguments(bundleManual);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, ManualControll).commit();
         } else if (id == R.id.CrawlControll) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new Crawl()).commit();
         } else if (id == R.id.Accelerometr) {
             fragmentManager.beginTransaction().replace(R.id.content_frame,new Accelerometr()).commit();
         } else if (id == R.id.Settings) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new Settings_Fragment()).commit();
+            Settings= new Settings_Fragment();
+            bundleSettings.putString("ip",dstAddres);
+            bundleSettings.putInt("port",dstPort);
+            Settings.setArguments(bundleManual);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
 
 
 
@@ -119,9 +129,9 @@ String dstAddres;
 
             //for test
         byte[] data2 = data_to_robot(0,0,0,0,0,0,0,0);
-        do_order(dstAddres,dstport,data2);
+       // do_order(dstAddres,dstport,data2);
 
-            fragmentManager.beginTransaction().replace(R.id.content_frame, RobotState).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RobotState()).commit();
 
         }
 
@@ -135,15 +145,13 @@ String dstAddres;
 
 
 
-    void init_screens() {
-/*
+    void init() {
+
         MainScreen = new MainScreen();
         Crawl = new Crawl();
         Accelerometr = new Accelerometr();
-        ManualControll = new ManualControll();
+
         RobotState= new  RobotState();
-        Settings= new Settings_Fragment();
-        */
         bundleMainScreen = new Bundle();
         bundleMainScreen= new Bundle();
         bundleCrawl= new Bundle();
@@ -220,8 +228,7 @@ String dstAddres;
 
     public class MyClientTask extends AsyncTask<Void, Void,Void> {
 
-        String dstAddress;
-        int dstPort;
+
 
 
 
@@ -317,6 +324,13 @@ String dstAddres;
 
         }
         //id==2 manualcontroll
+
+        if (id ==2) {
+
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            do_order(dstAddres, dstport, data);
+
+        }
 
 
     }

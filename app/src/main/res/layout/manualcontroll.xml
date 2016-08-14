@@ -1,87 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"><![CDATA[
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"    ]]>
 
-
-
-
-
-
-
-
-
-
-    ]]>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/frameLayout">
-
-    </FrameLayout>
-
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
+        android:text="Wyślij"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
+        android:id="@+id/send_button"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="84dp"
-        android:id="@+id/Lista_argumentow">
-
-        <TextView
-            android:text="X"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_x"
-            android:layout_weight="1.16" />
-
-        <TextView
-            android:text="Y"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_y"
-            android:layout_weight="1.17" />
-
-        <TextView
-            android:text="Z"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_z"
-            android:layout_weight="1.28" />
-
-        <TextView
-            android:text="Alfa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_alfa"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Beta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_beta"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Gamma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_gamma"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_speed"
-            android:layout_weight="1" />
-    </LinearLayout>
+        android:layout_marginBottom="36dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,7 +26,7 @@
         android:layout_centerHorizontal="true" />
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:background="?android:attr/actionModeSplitBackground"
@@ -106,78 +35,176 @@
         android:minWidth="?android:attr/listPreferredItemHeightLarge"
         android:dropDownWidth="match_parent"
         android:spinnerMode="dialog"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="58dp" />
+        android:layout_below="@+id/FunctionView"
+        android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="Wybierz funkcję:"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Lista_argumentow"
-        android:layout_alignParentStart="true"
-        android:id="@+id/edycja_argumentow"
-        android:weightSum="1">
+        android:id="@+id/FunctionView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:layout_width="149dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_x" />
+    <TextView
+        android:text="Wpisz parametry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Parameters"
+        android:textAppearance="@style/TextAppearance.AppCompat"
 
-        <EditText
-            android:layout_width="149dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_y"
-            android:layout_weight="0.40" />
+        android:layout_above="@+id/Tabela"
+        android:layout_alignEnd="@+id/FunctionView" />
 
-        <EditText
-            android:layout_width="162dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_z"
-            android:layout_weight="0.20" />
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="38dp"
+        android:id="@+id/Tabela"
+        android:layout_above="@+id/send_button"
+        android:layout_alignStart="@+id/textView4">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-        <EditText
-            android:layout_width="148dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_alfa" />
+            <TextView
+                android:text="X"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textX"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
 
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_beta" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/setX"
+                android:inputType="numberDecimal" />
 
-        <EditText
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_gamma"
-            android:layout_weight="0.33" />
+        </TableRow>
 
-        <EditText
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:text="0"
-            android:ems="10"
-            android:id="@+id/set_speed" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-    </LinearLayout>
+            <TextView
+                android:text="Y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textY"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setY" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Z"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textZ"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setZ" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Alfa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textAlfa"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setAlfa" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="beta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textBeta"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setBeta" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Gamma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textGamma"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setGamma" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textSpeed"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/setSpeed"
+                android:text="0.5" />
+
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

@@ -29,7 +29,7 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
     Button buttonConnect, buttonClear;
     String Ip;
     int port;
-    byte[] data;
+
     View myView;
 
 
@@ -52,8 +52,8 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
         editTextPort = (EditText) myView.findViewById(R.id.port);
         buttonConnect = (Button) myView.findViewById(R.id.connect);
         buttonClear = (Button) myView.findViewById(R.id.clear);
-        Ip = "192.168.1.112";
-        port = 2426;
+        Ip = getArguments().getString("ip");
+        port = getArguments().getInt("port");
 
          buttonConnect.setOnClickListener(buttonConnectOnClickListener);
 
@@ -89,7 +89,7 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
     Ip = editTextAddress.getText().toString();
     port = Integer.parseInt(editTextPort.getText().toString());
 
-    interfaceDataCommunicator.updateData(Ip, port, 1, 2, 3, 4, 5, 6, 7, 8, id);
+    interfaceDataCommunicator.updateData(Ip, port, 0, 0, 0, 0, 0, 0, 0, 0, id);
 
  }
     };
