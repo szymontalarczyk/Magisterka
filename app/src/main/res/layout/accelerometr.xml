@@ -10,6 +10,33 @@
         android:text="Accelerometr"
         android:id="@+id/textView5"
         android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/x_acc"
+        android:layout_below="@+id/z_acc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/y_acc"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/z_acc" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="126dp"
+        android:id="@+id/z_acc"
+        android:layout_below="@+id/y_acc"
+        android:layout_alignStart="@+id/x_acc" />
 </RelativeLayout>
