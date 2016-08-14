@@ -61,7 +61,7 @@ String dstAddres;
 
         init_screens();
 
-
+        MainScreen = new MainScreen();
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -103,15 +103,15 @@ String dstAddres;
 
 
         if (id == R.id.MainScreen) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MainScreen()).commit();
         } else if (id == R.id.ManualControll) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, ManualControll).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ManualControll()).commit();
         } else if (id == R.id.CrawlControll) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, Crawl).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new Crawl()).commit();
         } else if (id == R.id.Accelerometr) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, Accelerometr).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame,new Accelerometr()).commit();
         } else if (id == R.id.Settings) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new Settings_Fragment()).commit();
 
 
 
@@ -136,13 +136,14 @@ String dstAddres;
 
 
     void init_screens() {
-
+/*
         MainScreen = new MainScreen();
         Crawl = new Crawl();
         Accelerometr = new Accelerometr();
         ManualControll = new ManualControll();
         RobotState= new  RobotState();
         Settings= new Settings_Fragment();
+        */
         bundleMainScreen = new Bundle();
         bundleMainScreen= new Bundle();
         bundleCrawl= new Bundle();

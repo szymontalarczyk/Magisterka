@@ -12,9 +12,40 @@
     </string-array>
 
 
-     <string-array name="lista_komend">
-        <item> MoveFootRobot</item>
-        <item>MovePlatformRobot</item>
+     <string-array name="lista_komend_sterowanie_manualne">
+         <item> MovePlatform - ruch platformy względem pozycji neutralnej</item>
+         <item>MovePlatformRobot - ruch platformy niezależnie od konfiguracji konczyn</item>
+         <item> setFootInLeg - pozycja stopy w układzie kończyny</item>
+         <item>setFootInLeg - pozycja stopy w układzie robota</item>
+         <item> setFootInRobot - pozycja stopy w układzie robota</item>
+         <item>setFootInGlobal - pozycja stopy w układzie globalnym</item>
+         <item> moveFootInLeg - ruch stopy w układzie kończyny</item>
+         <item>moveFootInRobot - ruch stopy w układzie robota</item>
+         <item> moveFootInGlobal - ruch stopy w układzie globalnym</item>
+         <item> setLeg - ustawia kąty zadane w kończynie</item>
+     </string-array>
+
+
+
+    <string-array name="lista_komend_kroczenie">
+
+        <item> tripodStep - 25. krok ruchem trójpodporowym</item>
+        <item>waveStep - 26. krok ruchem pięciopodporowym</item>
+        <item> tripodStepPrepare - 27. przygotowanie do ruchu trojpodporowego</item>
+        <item>tripodStepFinish - 28. zakończenie ruchu trójpodporowego</item>
+        <item> wavePrepare - 29. przygotowanie do ruchu pięciopodporowego</item>
+        <item>waveFinish - 30. zakończenie ruchu pięciopodporowego</item>
+        <item> tripodTriangleStep - 31. krok ruchem trójpodporowym o trajektorii trojkatnej w fazie przenoszenia</item>
+        <item>waveTriangleStep - 32. krok ruchem pięciopodporowym o trajektorii trojkatnej w fazie przenoszenia</item>
+        <item> adaptiveStep -35. krok ruchem trójpodporowym po nierównym terenie </item>
+
 
     </string-array>
+
+
+
+
+
+
+
 </resources>

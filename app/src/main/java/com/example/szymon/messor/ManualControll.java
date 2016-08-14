@@ -25,7 +25,7 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.manualcontroll, container, false);
         spinner = (Spinner)myView.findViewById(R.id.spinner);
-adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komend,android.R.layout.simple_spinner_item);
+adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komend_sterowanie_manualne,android.R.layout.simple_list_item_multiple_choice);
        spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         return myView;
