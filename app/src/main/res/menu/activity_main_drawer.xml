@@ -14,7 +14,7 @@
         <item
             android:id="@+id/ManualControll"
             android:icon="@drawable/ic_joystick"
-            android:title="Sterowanie manualne" />
+            android:title="Ster. manualne" />
         <item
             android:id="@+id/CrawlControll"
             android:icon="@drawable/ic_step"

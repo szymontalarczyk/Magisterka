@@ -22,10 +22,11 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
-        app:itemTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:itemIconTint="@color/colorAccent"
         android:measureAllChildren="false"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        app:itemTextColor="@color/colorAccent" />
 
 
 

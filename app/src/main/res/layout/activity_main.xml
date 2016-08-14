@@ -23,7 +23,7 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemIconTint="@android:color/background_dark"
         android:measureAllChildren="false"
         android:nestedScrollingEnabled="false" />
 
