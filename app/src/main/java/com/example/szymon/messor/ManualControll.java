@@ -68,7 +68,6 @@ String Ip;
 adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komend_sterowanie_manualne,android.R.layout.simple_list_item_multiple_choice);
        spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
         x=(EditText)myView.findViewById(R.id.setX);
         y=(EditText)myView.findViewById(R.id.setY);
         z=(EditText)myView.findViewById(R.id.setZ);
@@ -80,13 +79,6 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
        Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
 sendbutton.setOnClickListener(sendbuttonOnClickListener);
-
-
-
-
-
-
-
 
 
 
@@ -106,6 +98,7 @@ sendbutton.setOnClickListener(sendbuttonOnClickListener);
 
     }
 
+
     View.OnClickListener sendbuttonOnClickListener = new View.OnClickListener() {
 
         @Override
@@ -113,6 +106,7 @@ sendbutton.setOnClickListener(sendbuttonOnClickListener);
 
 
 
+            flaga = spinner.getSelectedItemPosition()+1;
             x_send=Float.parseFloat(x.getText().toString());
             y_send=Float.parseFloat(y.getText().toString());
             z_send=Float.parseFloat(z.getText().toString());
@@ -121,7 +115,9 @@ sendbutton.setOnClickListener(sendbuttonOnClickListener);
             gamma_send=Float.parseFloat(gamma.getText().toString());
            speed_send=Float.parseFloat(speed.getText().toString());
 
-            interfaceDataCommunicator.updateData(Ip, port, 1, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
+
+
+            interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
 
 
         }

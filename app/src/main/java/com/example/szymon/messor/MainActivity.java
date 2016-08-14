@@ -51,7 +51,7 @@ Toolbar toolbar = null;
     ManualControll ManualControll;
     RobotState RobotState;
     Settings_Fragment Settings;
-String dstAddres;
+
     int dstport;
 
     @Override
@@ -61,7 +61,7 @@ String dstAddres;
 
 
         init();
-        dstAddres="192.168.1.107";
+        dstAddress="192.168.1.107";
         dstport=2426;
         MainScreen = new MainScreen();
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
@@ -77,8 +77,7 @@ String dstAddres;
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        dstAddres="192.168.1.107";
-        dstport=2426;
+
 
 
 
@@ -108,8 +107,8 @@ String dstAddres;
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MainScreen()).commit();
         } else if (id == R.id.ManualControll) {
             ManualControll = new ManualControll();
-            bundleManual.putString("ip","192.168.1.107");
-            bundleManual.putInt("port",2426);
+            bundleManual.putString("ip",dstAddress);
+            bundleManual.putInt("port",dstPort);
             ManualControll.setArguments(bundleManual);
             fragmentManager.beginTransaction().replace(R.id.content_frame, ManualControll).commit();
         } else if (id == R.id.CrawlControll) {
@@ -123,8 +122,6 @@ String dstAddres;
 
 
         } else if (id == R.id.robot_state) {
-            MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
-            myClientTask.execute();
             fragmentManager.beginTransaction().replace(R.id.content_frame, new RobotState()).commit();
 
         }
@@ -298,7 +295,7 @@ String dstAddres;
     @Override
     public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id) {
 
-        dstAddres=ip;
+        dstAddress=ip;
         dstport=port;
 
 
@@ -306,7 +303,7 @@ String dstAddres;
         if (id ==1) {
 
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
-            MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
+            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
 
         }
@@ -315,7 +312,7 @@ String dstAddres;
        if (id ==2) {
 
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
-           MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
+           MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
            myClientTask.execute();
 
         }
