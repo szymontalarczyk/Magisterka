@@ -108,8 +108,8 @@ String dstAddres;
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MainScreen()).commit();
         } else if (id == R.id.ManualControll) {
             ManualControll = new ManualControll();
-            bundleManual.putString("ip",dstAddres);
-            bundleManual.putInt("port",dstPort);
+            bundleManual.putString("ip","192.168.1.107");
+            bundleManual.putInt("port",2426);
             ManualControll.setArguments(bundleManual);
             fragmentManager.beginTransaction().replace(R.id.content_frame, ManualControll).commit();
         } else if (id == R.id.CrawlControll) {
@@ -118,19 +118,13 @@ String dstAddres;
             fragmentManager.beginTransaction().replace(R.id.content_frame,new Accelerometr()).commit();
         } else if (id == R.id.Settings) {
             Settings= new Settings_Fragment();
-            bundleSettings.putString("ip",dstAddres);
-            bundleSettings.putInt("port",dstPort);
-            Settings.setArguments(bundleManual);
             fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
 
 
 
         } else if (id == R.id.robot_state) {
-
-            //for test
-        byte[] data2 = data_to_robot(0,0,0,0,0,0,0,0);
-       // do_order(dstAddres,dstport,data2);
-
+            MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
+            myClientTask.execute();
             fragmentManager.beginTransaction().replace(R.id.content_frame, new RobotState()).commit();
 
         }
@@ -301,14 +295,6 @@ String dstAddres;
 
 
 
-    void do_order(String ip,int port,byte[] data)
-    {
-
-        MyClientTask myClientTask = new MyClientTask(ip,port,data);
-        myClientTask.execute();
-
-    }
-
     @Override
     public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id) {
 
@@ -320,15 +306,17 @@ String dstAddres;
         if (id ==1) {
 
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
-            do_order(dstAddres, dstport, data);
+            MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
+            myClientTask.execute();
 
         }
         //id==2 manualcontroll
 
-        if (id ==2) {
+       if (id ==2) {
 
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
-            do_order(dstAddres, dstport, data);
+           MyClientTask myClientTask = new MyClientTask(dstAddres,dstport,data);
+           myClientTask.execute();
 
         }
 

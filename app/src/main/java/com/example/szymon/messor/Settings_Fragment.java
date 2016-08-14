@@ -52,8 +52,8 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
         editTextPort = (EditText) myView.findViewById(R.id.port);
         buttonConnect = (Button) myView.findViewById(R.id.connect);
         buttonClear = (Button) myView.findViewById(R.id.clear);
-        Ip = getArguments().getString("ip");
-        port = getArguments().getInt("port");
+
+
 
          buttonConnect.setOnClickListener(buttonConnectOnClickListener);
 

@@ -37,8 +37,14 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
     EditText x,y,z,alfa,beta,gamma,speed;
     Button sendbutton;
 
+    int flaga;
+    float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
+
+
+
 String Ip;
     int port;
+
     @Override
     public void onAttach (Activity activity)
     {
@@ -106,7 +112,17 @@ sendbutton.setOnClickListener(sendbuttonOnClickListener);
         public void onClick(View arg0) {
 
 
-            interfaceDataCommunicator.updateData(Ip, port, 0, 0, 0, 0, 5, 6, 7, 8, id);
+
+            x_send=Float.parseFloat(x.getText().toString());
+            y_send=Float.parseFloat(y.getText().toString());
+            z_send=Float.parseFloat(z.getText().toString());
+            alfa_send=Float.parseFloat(alfa.getText().toString());
+            beta_send=Float.parseFloat(beta.getText().toString());
+            gamma_send=Float.parseFloat(gamma.getText().toString());
+           speed_send=Float.parseFloat(speed.getText().toString());
+
+            interfaceDataCommunicator.updateData(Ip, port, 1, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
+
 
         }
     };
