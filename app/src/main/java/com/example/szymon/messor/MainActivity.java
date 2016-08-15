@@ -21,6 +21,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
@@ -114,7 +116,14 @@ Toolbar toolbar = null;
         } else if (id == R.id.CrawlControll) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new Crawl()).commit();
         } else if (id == R.id.Accelerometr) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame,new Accelerometr()).commit();
+
+            Accelerometr = new Accelerometr();
+            bundleAcc.putString("ip",dstAddress);
+            bundleAcc.putInt("port",dstPort);
+            Accelerometr.setArguments(bundleAcc);
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame,Accelerometr).commit();
+
         } else if (id == R.id.Settings) {
             Settings= new Settings_Fragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
@@ -138,11 +147,7 @@ Toolbar toolbar = null;
 
     void init() {
 
-        MainScreen = new MainScreen();
-        Crawl = new Crawl();
-        Accelerometr = new Accelerometr();
 
-        RobotState= new  RobotState();
         bundleMainScreen = new Bundle();
         bundleMainScreen= new Bundle();
         bundleCrawl= new Bundle();
@@ -317,7 +322,23 @@ Toolbar toolbar = null;
 
         }
 
+        //id==3 Accelerometr
+        if (id==3)
+        {
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
+            myClientTask.execute();
 
+        }
+
+
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }

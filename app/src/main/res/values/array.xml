@@ -44,6 +44,15 @@
 
 
 
+    <string-array name="tryby_sterowania">
+
+        <item> Sterowanie przesunięciem w kierunkach X,Y,Z</item>
+        <item>Sterowanie obrotem wokół osi X,Y,Z</item>
+
+
+
+    </string-array>
+
 
 
 

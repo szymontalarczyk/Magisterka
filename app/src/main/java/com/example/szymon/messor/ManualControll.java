@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,6 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
 
     public Settings_Fragment.InterfaceDataCommunicator interfaceDataCommunicator;
 
-    public interface InterfaceDataCommunicator {
-        public void updateData(String ip,int port,int flaga,float x,float y, float z, float alpha, float beta, float gamma, float speed, int id);
-    }
-
-
-
-
-
 
 //ManualControll id = 2;
     int id = 2 ;
@@ -35,7 +28,7 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
     Spinner spinner;
     ArrayAdapter adapter;
     EditText x,y,z,alfa,beta,gamma,speed;
-    Button sendbutton_manual;
+    FloatingActionButton sendbutton_manual;
 
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
@@ -75,7 +68,9 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
         beta=(EditText)myView.findViewById(R.id.setBeta);
         gamma=(EditText)myView.findViewById(R.id.setGamma);
         speed=(EditText)myView.findViewById(R.id.setSpeed);
-       sendbutton_manual=(Button)myView.findViewById(R.id.send_button);
+
+
+       sendbutton_manual=(FloatingActionButton) myView.findViewById(R.id.send_button);
        Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
         sendbutton_manual.setOnClickListener(sendbuttonOnClickListener);
