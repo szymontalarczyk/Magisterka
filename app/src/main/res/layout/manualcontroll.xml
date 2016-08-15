@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/FunctionView"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:layout_below="@+id/textView4"
@@ -54,7 +54,7 @@
         android:id="@+id/Parameters"
         android:textAppearance="@style/TextAppearance.AppCompat"
 
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textAlignment="textStart"
         android:textStyle="normal|bold"
         android:layout_below="@+id/spinner"
@@ -211,7 +211,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Speed"
+                android:text="Prędkość"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textSpeed"

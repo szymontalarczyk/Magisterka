@@ -35,7 +35,7 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
     Spinner spinner;
     ArrayAdapter adapter;
     EditText x,y,z,alfa,beta,gamma,speed;
-    Button sendbutton;
+    Button sendbutton_manual;
 
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
@@ -75,10 +75,10 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
         beta=(EditText)myView.findViewById(R.id.setBeta);
         gamma=(EditText)myView.findViewById(R.id.setGamma);
         speed=(EditText)myView.findViewById(R.id.setSpeed);
-       sendbutton=(Button)myView.findViewById(R.id.send_button);
+       sendbutton_manual=(Button)myView.findViewById(R.id.send_button);
        Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
-sendbutton.setOnClickListener(sendbuttonOnClickListener);
+        sendbutton_manual.setOnClickListener(sendbuttonOnClickListener);
 
 
 
