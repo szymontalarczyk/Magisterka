@@ -24,7 +24,9 @@
         <item name="android:colorBackground">@android:color/holo_blue_bright</item>
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@android:color/darker_gray</item>
+        <item name="android:textColorPrimaryInverse">@color/colorPrimary</item>
+        <item name="android:colorForeground">@color/colorAccent</item>
     </style>
 
 </resources>

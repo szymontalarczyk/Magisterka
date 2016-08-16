@@ -6,7 +6,8 @@
         <item
             android:id="@+id/MainScreen"
             android:icon="@drawable/ic_equalizer"
-            android:title="Ekran Główny" />
+            android:title="Ekran Główny"
+            />
         <item
             android:id="@+id/robot_state"
             android:icon="@drawable/ic_equalizer"

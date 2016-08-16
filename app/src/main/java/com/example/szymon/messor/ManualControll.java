@@ -23,7 +23,7 @@ public class ManualControll extends Fragment implements AdapterView.OnItemSelect
 
 
 //ManualControll id = 2;
-    int id = 2 ;
+static int id = 2 ;
     View myView;
     Spinner spinner;
     ArrayAdapter adapter;
@@ -111,7 +111,7 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
            speed_send=Float.parseFloat(speed.getText().toString());
 
 
-
+limit_values();
             interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
 
 
@@ -120,4 +120,41 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
 
 
 
+    void limit_values()
+    {
+        if(x_send>1)
+            x_send=1;
+
+        if(x_send<-1)
+            x_send=-1;
+
+        if(y_send>1)
+            y_send=1;
+
+        if(z_send<-1)
+            z_send=-1;
+
+        if(alfa_send>1)
+            alfa_send=1;
+
+        if(alfa_send<-1)
+            alfa_send=-1;
+
+        if(gamma_send>1)
+            gamma_send=1;
+
+        if(gamma_send<-1)
+            gamma_send=-1;
+        if(beta_send>1)
+            beta_send=1;
+
+        if(beta_send<-1)
+            beta_send=-1;
+
+        if(speed_send>1)
+            speed_send=1;
+
+        if(speed_send<-1)
+            speed_send=-1;
+    }
 }

@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.example.szymon.messor.R.id.spinner_controll_mode;
+
 public class Accelerometr extends Fragment implements SensorEventListener, AdapterView.OnItemSelectedListener{
 
 
@@ -40,14 +46,16 @@ public class Accelerometr extends Fragment implements SensorEventListener, Adapt
     float linear_acceleration[]=new float[3];
     Spinner spinner_acc,spinner_controll_mode;
     ArrayAdapter adapter_acc,adapter_mode;
-
+boolean auto = false;
     EditText speed_acc;
 FloatingActionButton sendbutton_acc;
+
+
 
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
     //Accelerometr id = 3;
-    int id = 3 ;
+    static int id = 3 ;
     String Ip;
     int port;
     Switch switch_auto,switch_stop;
@@ -86,7 +94,7 @@ FloatingActionButton sendbutton_acc;
         mAccelerometr = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         mSensorManager.registerListener(this, mAccelerometr,
-                SensorManager.SENSOR_DELAY_NORMAL);
+                SensorManager.SENSOR_STATUS_ACCURACY_LOW);
 
         xa=(TextView)myView.findViewById(R.id.x_acc);
         ya=(TextView)myView.findViewById(R.id.y_acc);
@@ -120,7 +128,6 @@ FloatingActionButton sendbutton_acc;
             float z = sensorEvent.values[2];
 
 
-
     gravity[0] = alpha * gravity[0] + (1 - alpha) * x;
     gravity[1] = alpha * gravity[1] + (1 - alpha) * y;
     gravity[2] = alpha * gravity[2] + (1 - alpha) * z;
@@ -138,8 +145,7 @@ FloatingActionButton sendbutton_acc;
             linear_acceleration[0]= (float) MainActivity.round(linear_acceleration[0],2);
             linear_acceleration[1]= (float) MainActivity.round(linear_acceleration[1],2);
             linear_acceleration[2]= (float) MainActivity.round(linear_acceleration[2],2);
-
-
+            limit_values();
 
 
     xa.setText(Float.toString(x));
@@ -150,8 +156,34 @@ FloatingActionButton sendbutton_acc;
 
 
     axisX.setText(Float.toString(linear_acceleration[0]));
-    axisY.setText(Float.toString(linear_acceleration[1]));
-    axisZ.setText(Float.toString(linear_acceleration[2]));
+   axisY.setText(Float.toString(linear_acceleration[1]));
+
+            axisZ.setText(Float.toString(linear_acceleration[2]));
+
+            if(switch_auto.isChecked()==true)
+            {
+                if(linear_acceleration[0]>0.1)
+                send_values();
+
+                if(linear_acceleration[0]<-0.1)
+                    send_values();
+
+                if(linear_acceleration[1]>0.1)
+                    send_values();
+
+                if(linear_acceleration[1]<-0.1)
+                    send_values();
+
+                if(linear_acceleration[2]>0.1)
+                    send_values();
+
+                if(linear_acceleration[2]<-0.1)
+                    send_values();
+
+            }
+
+
+
 }
 
 
@@ -180,6 +212,31 @@ FloatingActionButton sendbutton_acc;
 
     }
 
+    void send_values()
+    {
+
+        if(spinner_controll_mode.getSelectedItemPosition()==0) {
+            x_send = Float.parseFloat(axisX.getText().toString());
+            y_send = Float.parseFloat(axisY.getText().toString());
+            z_send = Float.parseFloat(axisZ.getText().toString());
+            alfa_send = 0;
+            beta_send = 0;
+            gamma_send = 0;
+            speed_send = Float.parseFloat(speed_acc.getText().toString());
+        }
+
+        if(spinner_controll_mode.getSelectedItemPosition()==1) {
+
+            x_send = 0;
+            y_send = 0;
+            z_send = 0;
+            alfa_send = Float.parseFloat(axisX.getText().toString());
+            beta_send =Float.parseFloat(axisY.getText().toString());
+            gamma_send =Float.parseFloat(axisZ.getText().toString());
+            speed_send = Float.parseFloat(speed_acc.getText().toString());
+        }
+        interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
+    }
 
 
     View.OnClickListener sendbuttonAccOnClickListener = new View.OnClickListener() {
@@ -188,33 +245,7 @@ FloatingActionButton sendbutton_acc;
         public void onClick(View arg0) {
 
 
-            flaga = spinner_acc.getSelectedItemPosition()+1;
-            if(spinner_controll_mode.getSelectedItemPosition()==0) {
-                x_send = Float.parseFloat(axisX.getText().toString());
-                y_send = Float.parseFloat(axisY.getText().toString());
-                z_send = Float.parseFloat(axisZ.getText().toString());
-                alfa_send = 0;
-                beta_send = 0;
-                gamma_send = 0;
-                speed_send = Float.parseFloat(speed_acc.getText().toString());
-            }
-
-            if(spinner_controll_mode.getSelectedItemPosition()==1) {
-                x_send = 0;
-                y_send = 0;
-                z_send = 0;
-                alfa_send = Float.parseFloat(axisX.getText().toString());
-                beta_send =Float.parseFloat(axisY.getText().toString());
-                gamma_send =Float.parseFloat(axisZ.getText().toString());
-                speed_send = Float.parseFloat(speed_acc.getText().toString());
-            }
-
-
-
-
-
-            interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
-
+         send_values();
 
         }
     };
@@ -231,5 +262,28 @@ FloatingActionButton sendbutton_acc;
 
         }
     };
+
+    void limit_values()
+    {
+        if(linear_acceleration[0]>1)
+            linear_acceleration[0]=1;
+
+        if(linear_acceleration[0]<-1)
+            linear_acceleration[0]=-1;
+
+        if(linear_acceleration[1]>1)
+            linear_acceleration[1]=1;
+
+        if(linear_acceleration[1]<-1)
+            linear_acceleration[1]=-1;
+
+        if(linear_acceleration[2]>1)
+        linear_acceleration[2]=1;
+
+        if(linear_acceleration[2]<-1)
+            linear_acceleration[2]=-1;
+
+
+    }
 
 }

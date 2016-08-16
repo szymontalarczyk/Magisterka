@@ -23,7 +23,6 @@
         android:paddingRight="0dp"
         android:paddingLeft="0dp"
         android:padding="0dp" />
-        //android:src="@android:drawable/sym_def_app_icon" />
 
     <TextView
         android:layout_width="match_parent"
@@ -32,12 +31,13 @@
         android:text="MESSOR II"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="32dp"
-        android:textColor="?android:attr/textColorTertiary" />
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Politechnika Poznańska" />
+        android:text="Politechnika Poznańska"
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>
