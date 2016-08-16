@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner_acc"
         android:background="@android:drawable/btn_dropdown"
-        android:popupBackground="@color/colorPrimary"
+        android:popupBackground="@android:color/background_light"
         android:entries="@array/lista_komend_sterowanie_manualne"
         android:minWidth="?android:attr/listPreferredItemHeightLarge"
         android:dropDownWidth="match_parent"
@@ -187,7 +187,7 @@
         android:background="@android:drawable/btn_dropdown"
         android:layout_below="@+id/textView26"
         android:layout_centerHorizontal="true"
-        android:popupBackground="@color/colorPrimary"
+        android:popupBackground="@android:color/background_light"
         android:dropDownWidth="match_parent" />
 
     <TextView

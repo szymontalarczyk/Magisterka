@@ -23,10 +23,10 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:itemIconTint="@color/colorAccent"
+        app:itemIconTint="@color/colorPrimary"
         android:measureAllChildren="false"
         android:nestedScrollingEnabled="false"
-        app:itemTextColor="@color/colorAccent" />
+        app:itemTextColor="@color/colorPrimary" />
 
 
 
