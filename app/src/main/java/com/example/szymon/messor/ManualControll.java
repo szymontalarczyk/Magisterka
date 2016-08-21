@@ -29,11 +29,12 @@ static int id = 2 ;
     ArrayAdapter adapter;
     EditText x,y,z,alfa,beta,gamma,speed;
     FloatingActionButton sendbutton_manual;
-
+static final float offset = (float) 0.1;
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
 
-
+    Button plusx,plusy,plusz,plusalfa,plusbeta,plusgamma,plusspeed;
+    Button minusx,minusy,minusz,minusalfa,minusbeta,minusgamma,minusspeed;
 
 String Ip;
     int port;
@@ -69,15 +70,42 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
         gamma=(EditText)myView.findViewById(R.id.setGamma);
         speed=(EditText)myView.findViewById(R.id.setSpeed);
 
+        plusx=(Button) myView.findViewById(R.id.plusX);
+        plusy=(Button)myView.findViewById(R.id.plusY);
+        plusz=(Button)myView.findViewById(R.id.plusZ);
+        plusalfa=(Button)myView.findViewById(R.id.plusAlfa);
+        plusbeta=(Button)myView.findViewById(R.id.plusBeta);
+        plusgamma=(Button)myView.findViewById(R.id.plusGamma);
+        plusspeed=(Button)myView.findViewById(R.id.plusSpeed);
 
-       sendbutton_manual=(FloatingActionButton) myView.findViewById(R.id.send_button);
+
+        minusx=(Button) myView.findViewById(R.id.minusX);
+        minusy=(Button)myView.findViewById(R.id.minusY);
+        minusz=(Button)myView.findViewById(R.id.minusZ);
+        minusalfa=(Button)myView.findViewById(R.id.minusAlfa);
+        minusbeta=(Button)myView.findViewById(R.id.minusBeta);
+        minusgamma=(Button)myView.findViewById(R.id.minusGamma);
+        minusspeed=(Button)myView.findViewById(R.id.minusSpeed);
+
+        sendbutton_manual=(FloatingActionButton) myView.findViewById(R.id.send_button);
        Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
         sendbutton_manual.setOnClickListener(sendbuttonOnClickListener);
 
-
-
-
+plusx.setOnClickListener(buttons_listener);
+minusx.setOnClickListener(buttons_listener);
+        plusy.setOnClickListener(buttons_listener);
+        minusy.setOnClickListener(buttons_listener);
+        plusz.setOnClickListener(buttons_listener);
+        minusz.setOnClickListener(buttons_listener);
+        plusalfa.setOnClickListener(buttons_listener);
+        minusalfa.setOnClickListener(buttons_listener);
+        plusbeta.setOnClickListener(buttons_listener);
+        minusbeta.setOnClickListener(buttons_listener);
+        plusgamma.setOnClickListener(buttons_listener);
+        minusgamma.setOnClickListener(buttons_listener);
+        plusspeed.setOnClickListener(buttons_listener);
+        minusspeed.setOnClickListener(buttons_listener);
         return myView;
     }
 
@@ -111,7 +139,7 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
            speed_send=Float.parseFloat(speed.getText().toString());
 
 
-limit_values();
+
             interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
 
 
@@ -120,41 +148,72 @@ limit_values();
 
 
 
-    void limit_values()
+
+
+View.OnClickListener buttons_listener = new View.OnClickListener(){
+
+    public void onClick(View view)
     {
-        if(x_send>1)
-            x_send=1;
 
-        if(x_send<-1)
-            x_send=-1;
+        switch(view.getId()){
+            case R.id.plusX:
+                x_send=x_send + offset;
+                break;
+            case R.id.minusX:
+                x_send= x_send-offset;
+                break;
+            case R.id.plusY:
+                y_send= y_send+offset;
+                break;
+            case R.id.minusY:
+                y_send=y_send-offset;
+                break;
+            case R.id.plusZ:
+                z_send= z_send+offset;
+                break;
+            case R.id.minusZ:
+                z_send=z_send-offset;
+                break;
+            case R.id.plusAlfa:
+                alfa_send= alfa_send+offset;
+                break;
+            case R.id.minusAlfa:
+                alfa_send=alfa_send-offset;
+                break;
+            case R.id.plusBeta:
+                beta_send= beta_send+offset;
+                break;
+            case R.id.minusBeta:
+                beta_send=beta_send-offset;
+                break;
+            case R.id.plusGamma:
+                gamma_send= gamma_send+offset;
+                break;
+            case R.id.minusGamma:
+                gamma_send=gamma_send-offset;
+                break;
+            case R.id.plusSpeed:
+                speed_send= speed_send+offset;
+                break;
+            case R.id.minusSpeed:
+                speed_send=speed_send-offset;
+                break;
 
-        if(y_send>1)
-            y_send=1;
 
-        if(z_send<-1)
-            z_send=-1;
+        }
+        x.setText(Float.toString(x_send));
+        y.setText(Float.toString(y_send));
+        z.setText(Float.toString(z_send));
+        alfa.setText(Float.toString(alfa_send));
+        beta.setText(Float.toString(beta_send));
+        gamma.setText(Float.toString(gamma_send));
+        speed.setText(Float.toString(speed_send));
 
-        if(alfa_send>1)
-            alfa_send=1;
-
-        if(alfa_send<-1)
-            alfa_send=-1;
-
-        if(gamma_send>1)
-            gamma_send=1;
-
-        if(gamma_send<-1)
-            gamma_send=-1;
-        if(beta_send>1)
-            beta_send=1;
-
-        if(beta_send<-1)
-            beta_send=-1;
-
-        if(speed_send>1)
-            speed_send=1;
-
-        if(speed_send<-1)
-            speed_send=-1;
     }
+
+};
+
+
+
+
 }

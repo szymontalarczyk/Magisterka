@@ -54,6 +54,7 @@ Toolbar toolbar = null;
     RobotState RobotState;
     Settings_Fragment Settings;
 
+    String response;
     int dstport;
 
     @Override
@@ -65,6 +66,7 @@ Toolbar toolbar = null;
         init();
         dstAddress="192.168.1.107";
         dstport=2426;
+        response = "brak odpowiedzi";
         MainScreen = new MainScreen();
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -126,6 +128,7 @@ Toolbar toolbar = null;
 
         } else if (id == R.id.Settings) {
             Settings= new Settings_Fragment();
+
             fragmentManager.beginTransaction().replace(R.id.content_frame, Settings).commit();
 
 
@@ -230,16 +233,12 @@ Toolbar toolbar = null;
 
     public class MyClientTask extends AsyncTask<Void, Void,Void> {
 
-
-
-
-
         MyClientTask(String addr, int port,byte[] data) {
             dstAddress = addr;
             dstPort = port;
 
-        }
 
+        }
 
 
         @Override
@@ -256,13 +255,18 @@ Toolbar toolbar = null;
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 writeBuffer(buffer2,dataOutputStream);
 
+                response = dataInputStream.readUTF();
+
+
 
             } catch (UnknownHostException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                response = "UnknownHostException: " + e.toString();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                response = "IOException: " + e.toString();
             } finally {
                 if (socket != null) {
                     try {
@@ -270,6 +274,7 @@ Toolbar toolbar = null;
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
+
                     }
                 }
 
@@ -291,6 +296,7 @@ Toolbar toolbar = null;
                     }
                 }
             }
+
             return null;
         }
 
@@ -312,10 +318,11 @@ Toolbar toolbar = null;
 
         //choice ==1 settings data
         if (id ==1) {
-
+          Settings.setResponse(response);
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
             MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
+
 
         }
         //id==2 manualcontroll
@@ -346,6 +353,8 @@ Toolbar toolbar = null;
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+
 
 }
 

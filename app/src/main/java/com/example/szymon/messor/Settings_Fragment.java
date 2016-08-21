@@ -29,7 +29,7 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
     Button buttonConnect, buttonClear;
     String Ip;
     int port;
-
+String respond;
     View myView;
 
 
@@ -53,6 +53,7 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
         buttonConnect = (Button) myView.findViewById(R.id.connect);
         buttonClear = (Button) myView.findViewById(R.id.clear);
 
+textResponse = (TextView)myView.findViewById(R.id.response);
 
 
          buttonConnect.setOnClickListener(buttonConnectOnClickListener);
@@ -91,10 +92,17 @@ public InterfaceDataCommunicator interfaceDataCommunicator;
 
     interfaceDataCommunicator.updateData(Ip, port, 0, 0, 0, 0, 0, 0, 0, 0, id);
 
+
+
+
  }
     };
 
 
+    public void setResponse(String response)
+    {
+        textResponse.setText(response);
+    }
 
 
 
