@@ -28,11 +28,12 @@ import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.zip.ZipEntry;
 
 import static com.example.szymon.messor.R.id.spinner_controll_mode;
 
 public class Accelerometr extends Fragment implements SensorEventListener, AdapterView.OnItemSelectedListener{
-
+    //Accelerometr id = 3;
 
     public Settings_Fragment.InterfaceDataCommunicator interfaceDataCommunicator;
 
@@ -46,20 +47,21 @@ public class Accelerometr extends Fragment implements SensorEventListener, Adapt
     float linear_acceleration[]=new float[3];
     Spinner spinner_acc,spinner_controll_mode;
     ArrayAdapter adapter_acc,adapter_mode;
-boolean auto = false;
+    boolean auto = false;
     EditText speed_acc;
-FloatingActionButton sendbutton_acc;
-
-
-
+    FloatingActionButton sendbutton_acc;
+    FloatingActionButton emergency_acc;
+    TextView obrot_text,pitch_text,roll_text,wartosci_text,przysp_text;
+    float pitch;
+    float roll;
+    static final double PI = 3.14159265358979323846;
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
-    //Accelerometr id = 3;
     static int id = 3 ;
     String Ip;
     int port;
     Switch switch_auto,switch_stop;
-
+Switch pitchblock,rollblock;
 
     @Override
     public void onAttach (Activity activity)
@@ -92,6 +94,15 @@ FloatingActionButton sendbutton_acc;
         mSensorManager=(SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
 
         mAccelerometr = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        emergency_acc=(FloatingActionButton) myView.findViewById(R.id.emergency_stop_acc);
+
+        emergency_acc.setOnClickListener(emergency_listener);
+        obrot_text=(TextView)myView.findViewById(R.id.obrot_text);
+        obrot_text.setText("Obrót"+ " \u00B0");
+
+        pitchblock=(Switch) myView.findViewById(R.id.pitch_block);
+        rollblock=(Switch)myView.findViewById(R.id.roll_block);
+
 
         mSensorManager.registerListener(this, mAccelerometr,
                 SensorManager.SENSOR_STATUS_ACCURACY_LOW);
@@ -102,12 +113,13 @@ FloatingActionButton sendbutton_acc;
         axisX=(TextView)myView.findViewById(R.id.axisX);
         axisY=(TextView)myView.findViewById(R.id.axisY);
         axisZ=(TextView)myView.findViewById(R.id.axisZ);
-        switch_auto=(Switch)myView.findViewById(R.id.switch_auto);
+        switch_auto=(Switch)myView.findViewById(R.id.switch_auto_acc);
         switch_stop=(Switch)myView.findViewById(R.id.stop_switch);
         speed_acc=(EditText)myView.findViewById(R.id.speed_acc);
         sendbutton_acc=(FloatingActionButton)myView.findViewById(R.id.sendbutton_acc1);
-
         sendbutton_acc.setOnClickListener(sendbuttonAccOnClickListener);
+        roll_text=(TextView)myView.findViewById(R.id.roll_text);
+        pitch_text=(TextView)myView.findViewById(R.id.pitch_text);
         Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
 
@@ -127,7 +139,34 @@ FloatingActionButton sendbutton_acc;
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
+            if (pitchblock.isChecked()==true)
+            {
+                pitch=0;
 
+
+            }
+            else
+            {
+                pitch = (float) -Math.atan2(x,Math.sqrt(y*y+z));
+
+            }
+
+            if(rollblock.isChecked()==true)
+            {
+
+                roll=0;
+            }
+            else
+            {
+                roll = (float) (Math.atan2(y, z));
+
+            }
+
+
+
+
+            float pitch_to_text = (float) ((pitch*180)/PI);
+            float roll_to_text= (float) ((roll*180)/PI);
     gravity[0] = alpha * gravity[0] + (1 - alpha) * x;
     gravity[1] = alpha * gravity[1] + (1 - alpha) * y;
     gravity[2] = alpha * gravity[2] + (1 - alpha) * z;
@@ -142,43 +181,35 @@ FloatingActionButton sendbutton_acc;
             x= (float) MainActivity.round(x,2);
             y= (float) MainActivity.round(y,2);
             z= (float) MainActivity.round(z,2);
+            pitch= (float) MainActivity.round(pitch,2);
+            roll= (float) MainActivity.round(roll,2);
+            pitch_to_text= (float) MainActivity.round(pitch_to_text,2);
+            roll_to_text= (float) MainActivity.round(roll_to_text,2);
             linear_acceleration[0]= (float) MainActivity.round(linear_acceleration[0],2);
             linear_acceleration[1]= (float) MainActivity.round(linear_acceleration[1],2);
             linear_acceleration[2]= (float) MainActivity.round(linear_acceleration[2],2);
-            limit_values();
 
 
-    xa.setText(Float.toString(x));
-    ya.setText(Float.toString(y));
-    za.setText(Float.toString(z));
+            xa.setText(Float.toString(x));
+            ya.setText(Float.toString(y));
+            za.setText(Float.toString(z));
+
+            pitch_text.setText(Float.toString(pitch_to_text));
+            roll_text.setText(Float.toString(roll_to_text));
 
 
 
-
-    axisX.setText(Float.toString(linear_acceleration[0]));
-   axisY.setText(Float.toString(linear_acceleration[1]));
-
+            axisX.setText(Float.toString(linear_acceleration[0]));
+            axisY.setText(Float.toString(linear_acceleration[1]));
             axisZ.setText(Float.toString(linear_acceleration[2]));
+
+
 
             if(switch_auto.isChecked()==true)
             {
-                if(linear_acceleration[0]>0.1)
+
                 send_values();
 
-                if(linear_acceleration[0]<-0.1)
-                    send_values();
-
-                if(linear_acceleration[1]>0.1)
-                    send_values();
-
-                if(linear_acceleration[1]<-0.1)
-                    send_values();
-
-                if(linear_acceleration[2]>0.1)
-                    send_values();
-
-                if(linear_acceleration[2]<-0.1)
-                    send_values();
 
             }
 
@@ -216,9 +247,11 @@ FloatingActionButton sendbutton_acc;
     {
 
         if(spinner_controll_mode.getSelectedItemPosition()==0) {
-            x_send = Float.parseFloat(axisX.getText().toString());
-            y_send = Float.parseFloat(axisY.getText().toString());
-            z_send = Float.parseFloat(axisZ.getText().toString());
+            x_send = pitch;
+            y_send = roll;
+           // z_send = Float.parseFloat(axisZ.getText().toString());
+            z_send = 0;
+
             alfa_send = 0;
             beta_send = 0;
             gamma_send = 0;
@@ -230,9 +263,10 @@ FloatingActionButton sendbutton_acc;
             x_send = 0;
             y_send = 0;
             z_send = 0;
-            alfa_send = Float.parseFloat(axisX.getText().toString());
-            beta_send =Float.parseFloat(axisY.getText().toString());
-            gamma_send =Float.parseFloat(axisZ.getText().toString());
+            alfa_send = pitch;
+            beta_send =roll;
+           // gamma_send =Float.parseFloat(axisZ.getText().toString());
+            gamma_send =0;
             speed_send = Float.parseFloat(speed_acc.getText().toString());
         }
         interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
@@ -263,27 +297,15 @@ FloatingActionButton sendbutton_acc;
         }
     };
 
-    void limit_values()
-    {
-        if(linear_acceleration[0]>1)
-            linear_acceleration[0]=1;
-
-        if(linear_acceleration[0]<-1)
-            linear_acceleration[0]=-1;
-
-        if(linear_acceleration[1]>1)
-            linear_acceleration[1]=1;
-
-        if(linear_acceleration[1]<-1)
-            linear_acceleration[1]=-1;
-
-        if(linear_acceleration[2]>1)
-        linear_acceleration[2]=1;
-
-        if(linear_acceleration[2]<-1)
-            linear_acceleration[2]=-1;
 
 
-    }
+    View.OnClickListener emergency_listener = new View.OnClickListener() {
+
+        public void onClick(View view) {
+
+            interfaceDataCommunicator.updateData(Ip, port, 1, 0, 0, 0, 0, 0, 0, (float) 0.5, id);
+            switch_auto.setChecked(false);
+        }
+    };
 
 }

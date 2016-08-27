@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     android:layout_width="match_parent" android:layout_height="match_parent"
@@ -10,7 +11,7 @@
         android:clickable="true"
         app:fabSize="mini"
         app:srcCompat="@drawable/messorv1"
-        android:id="@+id/send_button"
+        android:id="@+id/floatingActionButton2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
@@ -82,7 +83,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Przesunięcie X"
+                android:text="Przesunięcie X [m]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textX"
@@ -99,7 +100,7 @@
                 android:textColor="?android:attr/textColorTertiary"
                 android:text="0.0"
                 android:textAlignment="center"
-                android:singleLine="false" />
+                android:singleLine="true" />
 
             <Button
                 android:text="-"
@@ -125,7 +126,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Przesunięcie Y"
+                android:text="Przesunięcie Y [m]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textY"
@@ -167,7 +168,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Przesunięcie Z"
+                android:text="Przesunięcie Z [m]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textZ"
@@ -209,7 +210,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Obrót wokoł osi X"
+                android:text="Obrót wokoł osi X [rad]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textAlfa"
@@ -251,7 +252,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Obrót wokół osi Y"
+                android:text="Obrót wokół osi Y [rad]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textBeta"
@@ -293,7 +294,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Obrót wokół osi Z"
+                android:text="Obrót wokół osi Z [rad]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textGamma"
@@ -335,7 +336,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Prędkość                    "
+                android:text="Prędkość [%]"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textSpeed"
@@ -372,5 +373,41 @@
 
         </TableRow>
     </TableLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/messorv1"
+        android:id="@+id/send_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:text="Auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/auto_switch_manual"
+        android:layout_above="@+id/send_button"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/grzybek"
+        android:id="@+id/emergency_STOP_manual"
+        android:layout_above="@+id/spinner"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="zeruj wartości"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/zero_manual"
+        android:layout_below="@+id/Tabela"
+        android:layout_alignEnd="@+id/Tabela" />
 
 </RelativeLayout>

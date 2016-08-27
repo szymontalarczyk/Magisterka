@@ -26,6 +26,7 @@ import java.math.RoundingMode;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 
@@ -40,6 +41,7 @@ Toolbar toolbar = null;
     byte[] data;
     byte[] id;
     byte[] dane;
+    byte[] inputdata;
     Bundle bundleMainScreen;
     Bundle bundleCrawl;
     Bundle bundleAcc;
@@ -56,17 +58,16 @@ Toolbar toolbar = null;
 
     String response;
     int dstport;
-
+float f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        inputdata = new  byte[32];
         init();
         dstAddress="192.168.1.107";
         dstport=2426;
-        response = "brak odpowiedzi";
         MainScreen = new MainScreen();
         fragmentManager.beginTransaction().replace(R.id.content_frame, MainScreen).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -255,8 +256,12 @@ Toolbar toolbar = null;
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 writeBuffer(buffer2,dataOutputStream);
 
-                response = dataInputStream.readUTF();
 
+                if(dataInputStream==null)
+                {
+
+                    dataInputStream.close();
+                }
 
 
             } catch (UnknownHostException e) {
@@ -288,14 +293,16 @@ Toolbar toolbar = null;
                 }
 
                 if (dataInputStream != null) {
-                    try {
-                        dataInputStream.close();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                   try {
+
+response="odpowiedz    " +dataInputStream;
+                       dataInputStream.close();
+                   } catch (IOException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
                     }
                 }
-            }
+           }
 
             return null;
         }
