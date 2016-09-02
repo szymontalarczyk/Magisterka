@@ -17,9 +17,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -58,7 +62,18 @@ Toolbar toolbar = null;
 
     String response;
     int dstport;
-float f;
+    float response_data0;
+    float response_data1;
+    float response_data2;
+    float response_data3;
+    float response_data4;
+    float response_data5;
+    float response_data6;
+    float response_data7;
+
+
+
+    float f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,6 +209,26 @@ float f;
         return data;
     }
 
+    public void data_from_robot(byte inputData[] )
+    {
+
+        response_data0 =ByteBuffer.wrap(inputData,0,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data1 = ByteBuffer.wrap(inputData,4,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data2 = ByteBuffer.wrap(inputData,8,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data3 = ByteBuffer.wrap(inputData,12,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data4 = ByteBuffer.wrap(inputData,16,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data5 = ByteBuffer.wrap(inputData,20,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data6 = ByteBuffer.wrap(inputData,24,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data7 = ByteBuffer.wrap(inputData,28,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+
+        response="odebrano  "+response_data0 + "  " + response_data1+ "  " + response_data2+ "  " + response_data3+ "  " + response_data4+ "  " + response_data5+ "  " + response_data6+ "  " + response_data7;
+
+
+    }
+
+
+
+
 
 
     public void writeBuffer (ByteBuffer buffer, OutputStream stream) {
@@ -231,7 +266,6 @@ float f;
 
 
 
-
     public class MyClientTask extends AsyncTask<Void, Void,Void> {
 
         MyClientTask(String addr, int port,byte[] data) {
@@ -256,13 +290,38 @@ float f;
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 writeBuffer(buffer2,dataOutputStream);
 
-
                 if(dataInputStream==null)
                 {
-
+                response="brak odpowiedzi";
                     dataInputStream.close();
                 }
+                if (dataInputStream != null) {
 
+                    int bytes_read = 0;
+
+
+                    try {
+
+
+                        do {
+                            bytes_read =dataInputStream.read(inputdata);
+
+                            if(bytes_read!=-1)
+                            {
+                              data_from_robot(inputdata);
+
+
+                            }
+                        }while (bytes_read==inputdata.length);
+
+
+
+                        dataInputStream.close();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
 
             } catch (UnknownHostException e) {
                 // TODO Auto-generated catch block
@@ -292,16 +351,6 @@ float f;
                     }
                 }
 
-                if (dataInputStream != null) {
-                   try {
-
-response="odpowiedz    " +dataInputStream;
-                       dataInputStream.close();
-                   } catch (IOException e) {
-                       // TODO Auto-generated catch block
-                       e.printStackTrace();
-                    }
-                }
            }
 
             return null;
@@ -325,11 +374,14 @@ response="odpowiedz    " +dataInputStream;
 
         //choice ==1 settings data
         if (id ==1) {
-          Settings.setResponse(response);
+
+
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+
             MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
 
+            Settings.setResponse(response);
 
         }
         //id==2 manualcontroll
@@ -360,7 +412,6 @@ response="odpowiedz    " +dataInputStream;
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
 
 
 }
