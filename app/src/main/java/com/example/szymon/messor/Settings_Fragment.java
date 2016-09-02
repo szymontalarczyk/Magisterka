@@ -90,7 +90,7 @@ textResponse = (TextView)myView.findViewById(R.id.response);
     Ip = editTextAddress.getText().toString();
     port = Integer.parseInt(editTextPort.getText().toString());
 
-    interfaceDataCommunicator.updateData(Ip, port, 10, 1, 0, 0, 0, 0, 0, 0, id);
+    interfaceDataCommunicator.updateData(Ip, port, 0, 1, 0, 0, 0, 0, 0, 0, id);
 
 
 

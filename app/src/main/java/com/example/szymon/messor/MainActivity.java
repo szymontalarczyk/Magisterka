@@ -276,15 +276,19 @@ Toolbar toolbar = null;
         }
 
 
+
         @Override
         protected Void doInBackground(Void... arg0) {
 
             Socket socket = null;
+
             DataOutputStream dataOutputStream = null;
             DataInputStream dataInputStream = null;
             ByteBuffer buffer2=ByteBuffer.wrap(data);
             try {
                 socket = new Socket(dstAddress, dstPort);
+
+
                 dataOutputStream = new DataOutputStream(
                         socket.getOutputStream());
                 dataInputStream = new DataInputStream(socket.getInputStream());
@@ -353,6 +357,8 @@ Toolbar toolbar = null;
 
            }
 
+
+
             return null;
         }
 
@@ -381,7 +387,7 @@ Toolbar toolbar = null;
             MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
 
-            Settings.setResponse(response);
+             Settings.setResponse("połączono");
 
         }
         //id==2 manualcontroll
