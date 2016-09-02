@@ -11,7 +11,7 @@
         android:clickable="true"
         app:fabSize="mini"
         app:srcCompat="@drawable/messorv1"
-        android:id="@+id/send_button_rs"
+        android:id="@+id/send_button_robotstate"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
@@ -87,7 +87,7 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/send_button_rs"
+        android:layout_above="@+id/send_button_robotstate"
         android:layout_alignParentStart="true">
         <TableRow
             android:layout_width="match_parent"

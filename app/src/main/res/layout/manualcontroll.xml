@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/Tabela"
 
-        android:layout_above="@+id/send_button_rs"
+        android:layout_above="@+id/send_button_robotstate"
         android:layout_alignParentStart="true">
         <TableRow
             android:layout_width="match_parent"
@@ -381,7 +381,7 @@
         android:clickable="true"
         app:fabSize="mini"
         app:srcCompat="@drawable/messorv1"
-        android:id="@+id/send_button_rs"
+        android:id="@+id/send_button_robotstate"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
@@ -390,7 +390,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/auto_switch_manual"
-        android:layout_above="@+id/send_button_rs"
+        android:layout_above="@+id/send_button_robotstate"
         android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.FloatingActionButton
@@ -410,14 +410,5 @@
         android:id="@+id/zero_manual"
         android:layout_below="@+id/Tabela"
         android:layout_alignEnd="@+id/Tabela" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner"
-        android:layout_alignEnd="@+id/Tabela"
-        android:layout_marginEnd="188dp"
-        android:id="@+id/response_manual" />
 
 </RelativeLayout>

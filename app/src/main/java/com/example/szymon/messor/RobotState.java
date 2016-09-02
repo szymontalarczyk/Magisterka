@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +72,7 @@ float response_1,response_2,response_3,response_4,response_5,response_6,response
         dataresponse6=(TextView)myView.findViewById(R.id.dataview6);
         dataresponse7=(TextView)myView.findViewById(R.id.dataview7);
 
-      sendbutton_rs=(FloatingActionButton) myView.findViewById(R.id.send_button_rs);
+      sendbutton_rs=(FloatingActionButton) myView.findViewById(R.id.send_button_robotstate);
         emergency_rs=(FloatingActionButton) myView.findViewById(R.id.emergency_STOP_robotstate);
 
         Ip = getArguments().getString("ip");

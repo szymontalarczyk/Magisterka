@@ -147,7 +147,11 @@ Switch pitchblock,rollblock;
             }
             else
             {
-                pitch = (float) -Math.atan2(x,Math.sqrt(y*y+z));
+                if(z<0.00000001) {
+                    z = (float) 0.00000001;
+                }
+
+                        pitch = (float) -Math.atan2(x, Math.sqrt(y * y + z));
 
             }
 
@@ -158,7 +162,11 @@ Switch pitchblock,rollblock;
             }
             else
             {
-                roll = (float) (Math.atan2(y, z));
+                if(z<0.00000001) {
+                    z = (float) 0.00000001;
+                }
+
+                    roll = (float) (Math.atan2(y, z));
 
             }
 

@@ -20,9 +20,7 @@ package com.example.szymon.messor;
         import java.net.SocketException;
         import java.util.Enumeration;
 
-/**
- * Created by pawel on 21.04.16.
- */
+
 public class MainScreen extends android.app.Fragment{
 
     View myView;

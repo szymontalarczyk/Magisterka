@@ -124,15 +124,26 @@ Toolbar toolbar = null;
 
 
         if (id == R.id.MainScreen) {
+
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MainScreen()).commit();
+
         } else if (id == R.id.ManualControll) {
+
             ManualControll = new ManualControll();
             bundleManual.putString("ip",dstAddress);
             bundleManual.putInt("port",dstPort);
             ManualControll.setArguments(bundleManual);
             fragmentManager.beginTransaction().replace(R.id.content_frame, ManualControll).commit();
+
         } else if (id == R.id.CrawlControll) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new Crawl()).commit();
+
+            Crawl = new Crawl();
+            bundleCrawl.putString("ip",dstAddress);
+            bundleCrawl.putInt("port",dstPort);
+            Crawl.setArguments(bundleCrawl);
+
+
+            fragmentManager.beginTransaction().replace(R.id.content_frame, Crawl).commit();
         } else if (id == R.id.Accelerometr) {
 
             Accelerometr = new Accelerometr();
@@ -216,7 +227,7 @@ Toolbar toolbar = null;
     public void data_from_robot(byte inputData[] )
     {
 
-        response_data0 =ByteBuffer.wrap(inputData,0,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        response_data0 = ByteBuffer.wrap(inputData,0,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
         response_data1 = ByteBuffer.wrap(inputData,4,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
         response_data2 = ByteBuffer.wrap(inputData,8,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
         response_data3 = ByteBuffer.wrap(inputData,12,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
@@ -414,7 +425,7 @@ Toolbar toolbar = null;
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
            myClientTask.execute();
-           ManualControll.setResponse(response);
+
 
         }
 
@@ -435,6 +446,16 @@ Toolbar toolbar = null;
             myClientTask.execute();
             RobotState.sendvalues( response_data0, response_data1, response_data2, response_data3, response_data4, response_data5, response_data6, response_data7);
             RobotState.setResponse(response);
+
+        }
+
+
+        if (id==5)
+        {
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
+            myClientTask.execute();
+
 
         }
 
