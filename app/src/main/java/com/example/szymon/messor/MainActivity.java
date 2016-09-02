@@ -236,23 +236,13 @@ Toolbar toolbar = null;
         response_data6 = ByteBuffer.wrap(inputData,24,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
         response_data7 = ByteBuffer.wrap(inputData,28,4).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 
-        response="odebrano  "+response_data0 + "  " + response_data1+ "  " + response_data2+ "  " + response_data3+ "  " + response_data4+ "  " + response_data5+ "  " + response_data6+ "  " + response_data7;
+        response="połączono  "+response_data0 + "  " + response_data1+ "  " + response_data2+ "  " + response_data3+ "  " + response_data4+ "  " + response_data5+ "  " + response_data6+ "  " + response_data7;
 
 
     }
 
 
-    void zero_response_data ()
-    {
-        response_data0 =0;
-        response_data1 =0;
-        response_data2 =0;
-        response_data3 =0;
-        response_data4 =0;
-        response_data5 =0;
-        response_data6 =0;
-        response_data7 =0;
-    }
+
 
 
 
@@ -415,7 +405,7 @@ Toolbar toolbar = null;
             MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
 
-             Settings.setResponse("połączono");
+             Settings.setResponse(response);
 
         }
         //id==2 manualcontroll
@@ -449,7 +439,7 @@ Toolbar toolbar = null;
 
         }
 
-
+//id==5 Crawl
         if (id==5)
         {
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
@@ -459,6 +449,7 @@ Toolbar toolbar = null;
 
         }
 
+        //zerowanie inputdatastream
         for(int i = 0;i<32;i++)
         {
             inputdata[i]=0;

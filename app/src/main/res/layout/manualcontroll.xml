@@ -401,7 +401,8 @@
         app:srcCompat="@drawable/grzybek"
         android:id="@+id/emergency_STOP_manual"
         android:layout_above="@+id/spinner"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/colorPrimary" />
 
     <Button
         android:text="zeruj wartości"

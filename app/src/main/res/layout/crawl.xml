@@ -54,7 +54,7 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/grzybek"
         android:id="@+id/emergency_STOP_crawl"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_above="@+id/spinner_crawl"
         android:layout_alignParentEnd="true" />
 
