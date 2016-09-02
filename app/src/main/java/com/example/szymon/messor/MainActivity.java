@@ -150,7 +150,11 @@ Toolbar toolbar = null;
 
 
         } else if (id == R.id.robot_state) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new RobotState()).commit();
+            RobotState = new RobotState();
+            bundleRobotState.putString("ip",dstAddress);
+            bundleRobotState.putInt("port",dstPort);
+            RobotState.setArguments(bundleRobotState);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, RobotState).commit();
 
         }
 
@@ -227,6 +231,17 @@ Toolbar toolbar = null;
     }
 
 
+    void zero_response_data ()
+    {
+        response_data0 =0;
+        response_data1 =0;
+        response_data2 =0;
+        response_data3 =0;
+        response_data4 =0;
+        response_data5 =0;
+        response_data6 =0;
+        response_data7 =0;
+    }
 
 
 
@@ -320,7 +335,9 @@ Toolbar toolbar = null;
 
 
 
+
                         dataInputStream.close();
+
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -397,6 +414,7 @@ Toolbar toolbar = null;
             data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
            myClientTask.execute();
+           ManualControll.setResponse(response);
 
         }
 
@@ -409,7 +427,22 @@ Toolbar toolbar = null;
 
         }
 
+//id==4 RobotState
+        if (id==4)
+        {
+            data = data_to_robot(flaga, x, y, z, alpha, beta, gamma, speed);
+            MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
+            myClientTask.execute();
+            RobotState.sendvalues( response_data0, response_data1, response_data2, response_data3, response_data4, response_data5, response_data6, response_data7);
+            RobotState.setResponse(response);
 
+        }
+
+        for(int i = 0;i<32;i++)
+        {
+            inputdata[i]=0;
+
+        }
     }
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -418,6 +451,7 @@ Toolbar toolbar = null;
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
 
 
 }

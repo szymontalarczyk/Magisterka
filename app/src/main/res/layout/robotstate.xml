@@ -1,15 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/messorv1"
+        android:id="@+id/send_button_rs"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Odczyt stanu robota"
+        android:id="@+id/textView6"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:theme="@style/AppTheme"
+        android:transitionName="@string/abc_action_bar_up_description"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Wybierz funkcję:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView16"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorTertiary"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Odebrane bajty :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView21"
+        android:layout_below="@+id/spinner_rc"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="RobotState"
-        android:id="@+id/textView6"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/textView21"
+        android:layout_alignParentStart="true"
+        android:id="@+id/response_robotstate" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_rc"
+        android:background="@android:drawable/btn_dropdown"
+        android:popupBackground="@android:color/background_light"
+        android:entries="@array/lista_komend_odczyt_stanu_robota"
+        android:minWidth="?android:attr/listPreferredItemHeightLarge"
+        android:dropDownWidth="match_parent"
+        android:dropDownSelector="@drawable/side_nav_bar"
+        android:textAlignment="center"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/grzybek"
+        android:id="@+id/emergency_STOP_robotstate"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_above="@+id/spinner_rc"
+        android:layout_alignParentEnd="true" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/send_button_rs"
+        android:layout_alignParentStart="true">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata0                "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview0"
+                android:textSize="30sp" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata1"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview1"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata2"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview2"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata3"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview3"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata4"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview4"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata5"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview5"
+                android:textSize="30sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata6"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview6"
+                android:textSize="30sp" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="textdata7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdata7"
+                android:textSize="30sp" />
+
+            <TextView
+                android:text="dataview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataview7"
+                android:textSize="30sp" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
 </RelativeLayout>

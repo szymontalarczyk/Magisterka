@@ -16,8 +16,7 @@
          <item> MovePlatform - ruch platformy względem pozycji neutralnej</item>
          <item>MovePlatformRobot - ruch platformy niezależnie od konfiguracji konczyn</item>
          <item> setFootInLeg - pozycja stopy w układzie kończyny</item>
-         <item>setFootInLeg - pozycja stopy w układzie robota</item>
-         <item> setFootInRobot - pozycja stopy w układzie robota</item>
+         <item>setFootInRobot - pozycja stopy w układzie robota</item>
          <item>setFootInGlobal - pozycja stopy w układzie globalnym</item>
          <item> moveFootInLeg - ruch stopy w układzie kończyny</item>
          <item>moveFootInRobot - ruch stopy w układzie robota</item>
@@ -39,6 +38,27 @@
         <item>waveTriangleStep - 32. krok ruchem pięciopodporowym o trajektorii trojkatnej w fazie przenoszenia</item>
         <item> adaptiveStep -35. krok ruchem trójpodporowym po nierównym terenie </item>
 
+
+    </string-array>
+
+
+    <string-array name="lista_komend_odczyt_stanu_robota">
+
+     <item>readFootForce - 10. Odczytuje stan czujnika nacisku w stopie </item>
+        <item>readLegState - 11. Odczytuje katy w stawach </item>
+        <item>readLegState2 - 12. Odczytuje wartości prądów pobieranych przez serwomechanizmy </item>
+        <item>readLegCurrent - 13. Odczytuje wartości prądów pobieranych przez serwomechanizmy </item>
+        <item>readLegCurrent2 - 14. Odczytuje wartości prądów pobieranych przez serwomechanizmy(dla dwóch kończyn jednocześnie </item>
+        <item>readLegForces - 15. Odczytuje stan czujników nacisku w stopach robota </item>
+        <item>readLegForceInLeg - 16.Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu </item>
+        <item>readLegForceInLeg - 17. Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (dla dwóch kończyn jednocześnie) </item>
+        <item>readLegForceInRobot - 18. Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie robota) </item>
+        <item>readLegForceInRobot2 - 19. Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie robota, dla dwóch kończyn jednocześnie) </item>
+        <item>readLegForceInGlobal - 20. Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie globalnym) </item>
+        <item>readLegForceInGlobal2 - 21. Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie globalnym, dla dwóch kończyn jednocześnie)</item>
+        <item>readPositionIMU - 22. Odczytuje pozycje robota mierzona przez IMU </item>
+        <item>resetIMU - 23. Resetuje pomiar IMU - ustawia wartości zero </item>
+        <item>readSensors - 24. Odczytuje stan substancji niebezpiecznych </item>
 
     </string-array>
 

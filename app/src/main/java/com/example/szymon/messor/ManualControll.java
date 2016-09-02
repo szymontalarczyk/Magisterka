@@ -31,18 +31,17 @@ static int id = 2 ;
     EditText x,y,z,alfa,beta,gamma,speed;
     FloatingActionButton sendbutton_manual;
     FloatingActionButton emergency_manual;
-
+TextView manual_response;
     static final float offset = (float) 0.01;
     float offset_leg = offset;
 
     int flaga;
     float x_send,y_send,z_send,alfa_send,beta_send,gamma_send,speed_send;
-    boolean auto = false;
     Button plusx,plusy,plusz,plusalfa,plusbeta,plusgamma,plusspeed;
     Button minusx,minusy,minusz,minusalfa,minusbeta,minusgamma,minusspeed;
     Button zero_values;
     Switch switch_auto;
-String Ip;
+    String Ip;
     int port;
 
 
@@ -103,13 +102,14 @@ adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.lista_komen
         textdata5=(TextView)myView.findViewById(R.id.textBeta);
         textdata6=(TextView)myView.findViewById(R.id.textGamma);
 
+        manual_response=(TextView)myView.findViewById(R.id.response_manual);
         switch_auto=(Switch)myView.findViewById(R.id.auto_switch_manual);
 
         zero_values=(Button)myView.findViewById(R.id.zero_manual);
-        sendbutton_manual=(FloatingActionButton) myView.findViewById(R.id.send_button);
+        sendbutton_manual=(FloatingActionButton) myView.findViewById(R.id.send_button_rs);
         emergency_manual=(FloatingActionButton) myView.findViewById(R.id.emergency_STOP_manual);
 
-       Ip = getArguments().getString("ip");
+        Ip = getArguments().getString("ip");
         port = getArguments().getInt("port");
         sendbutton_manual.setOnClickListener(sendbuttonOnClickListener);
 zero_values.setOnClickListener(zeroes_listener);
@@ -343,5 +343,9 @@ void zeroes()
     };
 
 
+    public void setResponse(String response)
+    {
+        manual_response.setText(response);
+    }
 
 }
