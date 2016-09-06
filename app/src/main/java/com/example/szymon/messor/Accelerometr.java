@@ -162,7 +162,7 @@ Switch pitchblock,rollblock;
             }
             else
             {
-                if(z<0.00000001) {
+                if(z==0) {
                     z = (float) 0.00000001;
                 }
 

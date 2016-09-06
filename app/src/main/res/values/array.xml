@@ -51,7 +51,7 @@
         <item>readLegCurrent2: Odczytuje wartości prądów pobieranych przez serwomechanizmy(dla dwóch kończyn jednocześnie </item>
         <item>readLegForces: Odczytuje stan czujników nacisku w stopach robota </item>
         <item>readLegForceInLeg: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu </item>
-        <item>readLegForceInLeg: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (dla dwóch kończyn jednocześnie) </item>
+        <item>readLegForceInLeg2: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (dla dwóch kończyn jednocześnie) </item>
         <item>readLegForceInRobot: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie robota) </item>
         <item>readLegForceInRobot2: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie robota, dla dwóch kończyn jednocześnie) </item>
         <item>readLegForceInGlobal: Odczytuje sile kontaktu stopy na podłoże obliczana na podstawie czujników prądu (wartość w układzie globalnym) </item>

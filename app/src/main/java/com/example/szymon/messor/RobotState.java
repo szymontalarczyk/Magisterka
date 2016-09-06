@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,8 +39,9 @@ public class RobotState extends android.app.Fragment implements AdapterView.OnIt
     float response_1,response_2,response_3,response_4,response_5,response_6,response_0,response_7;
     String Ip;
     int port;
-
-
+    Button plus_leg1, plus_leg0,minus_leg0,minus_leg1;
+    EditText leg1,leg0;
+    TextView textdata1, textdata2, textdata3, textdata4, textdata5, textdata6,textdata0,textdata7,dataview1,dataview2,dataview3,dataview4,dataview5,dataview6,dataview7,dataview0,chooseleg0,chooseleg1;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
@@ -88,8 +91,47 @@ public class RobotState extends android.app.Fragment implements AdapterView.OnIt
         spinner_rs.setAdapter(adapter);
         spinner_rs.setOnItemSelectedListener(this);
         autoswitch_robotstate=(Switch)myView.findViewById(R.id.switch_robotstate);
+        plus_leg0=(Button)myView.findViewById(R.id.plusleg0);
+        plus_leg1=(Button)myView.findViewById(R.id.plusleg1);
+        minus_leg0=(Button)myView.findViewById(R.id.minusleg0);
+        minus_leg1=(Button)myView.findViewById(R.id.minusleg1);
+
+
+        plus_leg0.setOnClickListener(buttons_listener);
+        plus_leg1.setOnClickListener(buttons_listener);
+        minus_leg0.setOnClickListener(buttons_listener);
+        minus_leg1.setOnClickListener(buttons_listener);
+        leg0=(EditText)myView.findViewById(R.id.et_leg0);
+        leg1=(EditText)myView.findViewById(R.id.et_leg1);
+
+
+        x_send=0;
+        y_send=1;
+
+        textdata1 = (TextView) myView.findViewById(R.id.textdata1);
+        textdata2 = (TextView) myView.findViewById(R.id.textdata2);
+        textdata3 = (TextView) myView.findViewById(R.id.textdata3);
+        textdata4 = (TextView) myView.findViewById(R.id.textdata4);
+        textdata5 = (TextView) myView.findViewById(R.id.textdata5);
+        textdata6 = (TextView) myView.findViewById(R.id.textdata6);
+        textdata0 = (TextView) myView.findViewById(R.id.textdata0);
+        textdata7 = (TextView) myView.findViewById(R.id.textdata7);
+
+        dataview0 = (TextView)myView.findViewById(R.id.dataview0);
+        dataview1 = (TextView)myView.findViewById(R.id.dataview1);
+        dataview2 = (TextView)myView.findViewById(R.id.dataview2);
+        dataview3 = (TextView)myView.findViewById(R.id.dataview3);
+        dataview4 = (TextView)myView.findViewById(R.id.dataview4);
+        dataview5 = (TextView)myView.findViewById(R.id.dataview5);
+        dataview6 = (TextView)myView.findViewById(R.id.dataview6);
+        dataview7 = (TextView)myView.findViewById(R.id.dataview7);
+
+        chooseleg0 = (TextView)myView.findViewById(R.id.chooseleg0);
+        chooseleg1 = (TextView)myView.findViewById(R.id.chooseleg1);
+
 
         autoswitch_robotstate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -143,7 +185,22 @@ public class RobotState extends android.app.Fragment implements AdapterView.OnIt
 
         TextView selected_option = (TextView) view;
         Toast.makeText(this.getActivity(),"Wybrano: "+selected_option.getText(),Toast.LENGTH_SHORT).show();
-        set_response_zero();
+
+
+     int id_function = spinner_rs.getSelectedItemPosition();
+        if(id_function==2  || id_function==4 || id_function==7 || id_function==9 || id_function==11)
+        {
+            function_with6args();
+
+        }
+        else
+        {
+            function_with3args();
+
+        }
+
+
+            set_response_zero();
 
         //interfaceDataCommunicator.updateData(Ip, port, flaga, x_send, y_send, z_send, alfa_send, beta_send, gamma_send, speed_send, id);
 
@@ -238,8 +295,133 @@ void set_response_zero()
 
     }
 
+    View.OnClickListener buttons_listener = new View.OnClickListener() {
+
+        public void onClick(View view) {
+
+            switch (view.getId()) {
+                case R.id.plusleg0:
+                    x_send = x_send + 1;
+                    break;
+                case R.id.minusleg0:
+                    x_send = x_send - 1;
+                    break;
+                case R.id.plusleg1:
+                    y_send = y_send + 1;
+                    break;
+                case R.id.minusleg1:
+                    y_send = y_send - 1;
+                    break;
 
 
+            }
+            if(x_send<0)
+            {
+                x_send=0;
+            }
+            if(y_send<0)
+            {
+                y_send=0;
+            }
+            if(x_send>5)
+            {
+                x_send=5;
+            }
+            if(y_send>5)
+            {
+                y_send=5;
+            }
+
+            leg0.setText(String.format("%.0f", x_send));
+            leg1.setText(String.format("%.0f", y_send));
+            set_text();
+
+        }
 
 
+};
+
+void function_with3args()
+{
+    textdata1.setVisibility(View.VISIBLE);
+    textdata2.setVisibility(View.VISIBLE);
+    textdata3.setVisibility(View.VISIBLE);
+    textdata4.setVisibility(View.GONE);
+    textdata5.setVisibility(View.GONE);
+    textdata6.setVisibility(View.GONE);
+    textdata0.setVisibility(View.GONE);
+    textdata7.setVisibility(View.GONE);
+
+
+    dataview0.setVisibility(View.GONE);
+    dataview1.setVisibility(View.VISIBLE);
+    dataview2.setVisibility(View.VISIBLE);
+    dataview3.setVisibility(View.VISIBLE);
+    dataview4.setVisibility(View.GONE);
+    dataview5.setVisibility(View.GONE);
+    dataview6.setVisibility(View.GONE);
+    dataview7.setVisibility(View.GONE);
+
+    chooseleg0.setVisibility(View.VISIBLE);
+    leg0.setVisibility(View.VISIBLE);
+    plus_leg0.setVisibility(View.VISIBLE);
+    minus_leg0.setVisibility(View.VISIBLE);
+
+    chooseleg1.setVisibility(View.GONE);
+    leg1.setVisibility(View.GONE);
+    plus_leg1.setVisibility(View.GONE);
+    minus_leg1.setVisibility(View.GONE);
+
+    set_text();
 }
+
+
+    void function_with6args()
+    {
+        textdata1.setVisibility(View.VISIBLE);
+        textdata2.setVisibility(View.VISIBLE);
+        textdata3.setVisibility(View.VISIBLE);
+        textdata4.setVisibility(View.VISIBLE);
+        textdata5.setVisibility(View.VISIBLE);
+        textdata6.setVisibility(View.VISIBLE);
+        textdata0.setVisibility(View.GONE);
+        textdata7.setVisibility(View.GONE);
+
+
+        dataview0.setVisibility(View.GONE);
+        dataview1.setVisibility(View.VISIBLE);
+        dataview2.setVisibility(View.VISIBLE);
+        dataview3.setVisibility(View.VISIBLE);
+        dataview4.setVisibility(View.VISIBLE);
+        dataview5.setVisibility(View.VISIBLE);
+        dataview6.setVisibility(View.VISIBLE);
+        dataview7.setVisibility(View.GONE);
+
+
+        chooseleg0.setVisibility(View.VISIBLE);
+        leg0.setVisibility(View.VISIBLE);
+        plus_leg0.setVisibility(View.VISIBLE);
+        minus_leg0.setVisibility(View.VISIBLE);
+
+        chooseleg1.setVisibility(View.VISIBLE);
+        leg1.setVisibility(View.VISIBLE);
+        plus_leg1.setVisibility(View.VISIBLE);
+        minus_leg1.setVisibility(View.VISIBLE);
+        set_text();
+    }
+
+
+    void set_text()
+    {
+
+        textdata1.setText("Noga nr. " + String.format("%.0f", x_send)+ "   Serwo nr. 0       ");
+        textdata2.setText("Noga nr. " + String.format("%.0f", x_send)+ "   Serwo nr. 1       ");
+        textdata3.setText("Noga nr. " + String.format("%.0f", x_send)+ "   Serwo nr. 2       ");
+        textdata4.setText("Noga nr. " + String.format("%.0f", y_send)+ "   Serwo nr. 0       ");
+        textdata5.setText("Noga nr. " + String.format("%.0f", y_send)+ "   Serwo nr. 1       ");
+        textdata6.setText("Noga nr. " + String.format("%.0f", y_send)+ "   Serwo nr. 2       ");
+    }
+
+    }
+
+
