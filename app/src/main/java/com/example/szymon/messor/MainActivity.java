@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -73,11 +74,16 @@ Toolbar toolbar = null;
 
 
 
-    float f;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         inputdata = new  byte[32];
         init();
@@ -404,6 +410,10 @@ Toolbar toolbar = null;
 
             MyClientTask myClientTask = new MyClientTask(dstAddress,dstport,data);
             myClientTask.execute();
+
+
+
+
 
              Settings.setResponse(response);
 
